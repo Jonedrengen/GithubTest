@@ -7,7 +7,7 @@ import requests
 # Defining a function that fetches weather data based on given latitude and longitude
 def get_weather(latitude=52.52, longitude=13.41):
     # Constructing the URL for the API request
-    url = f'https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly=temperature_2m&daily=weathercode&timezone=auto&forecast_days=3'
+    url = f'https://api.open-meteo.com/v1/forecast?latitude=56&longitude=10&hourly=temperature_2m,rain,weathercode'
     
     # Making the API request and converting the response to a JSON object
     response = requests.get(url).json()
@@ -21,7 +21,7 @@ def get_weather_info(json_data):
     # Getting the current temperature from the 'hourly' key of the JSON data
     current_temperature = json_data['hourly']["temperature_2m"][0]
     # Getting the weather code for the current day from the 'daily' key
-    weather_code_today = json_data['daily']["weathercode"][0]
+    weather_code_today = json_data['hourly']["weathercode"][0]
     
     # Checking if the weather code is 3 (Assuming this indicates rain might come soon)
     if weather_code_today == 3:
