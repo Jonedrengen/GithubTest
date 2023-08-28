@@ -7,6 +7,9 @@ import discord
 # Importing a library to make web requests.
 import requests
 
+# Importing the datetime module, to get the current time of the day. This is done, because the api is structured so the json object returns values starting from 00:00 on the day called.
+from datetime import datetime
+
 # This function fetches weather data from an API for a given location.
 def get_weather(latitude=52.52, longitude=13.41):
     # Creating the specific web address to get weather for the given location.
@@ -19,10 +22,13 @@ def get_weather(latitude=52.52, longitude=13.41):
 
 # This function extracts and interprets specific details from the weather data.
 def get_weather_info(json_data):
+    # Getting the current hour
+    current_hour = datetime.now().hour
+
     # Extracting the current temperature from the weather data.
-    current_temperature = json_data['hourly']["temperature_2m"][0]
+    current_temperature = json_data['hourly']["temperature_2m"][current_hour]
     # Extracting the code that tells us the current weather type (like rain, sun, etc.).
-    weather_code_today = json_data['hourly']["weathercode"][0]
+    weather_code_today = json_data['hourly']["weathercode"][current_hour]
     
     # Checking if the weather code suggests rain might be coming soon.
     if weather_code_today == 3:
