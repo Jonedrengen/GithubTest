@@ -14,8 +14,7 @@ def get_weather(latitude=52.52, longitude=13.41):
     # Returning the JSON data
     return response
 
-# Calling the function to fetch weather data and storing it in 'result'
-result = get_weather()
+
 
 # Defining a function to extract specific weather information from the fetched JSON data
 def get_weather_info(json_data):
@@ -40,13 +39,6 @@ def get_weather_info(json_data):
         "Raining": is_raining
     }
 
-# Calling the function to extract weather info and storing it in 'weather_info'
-weather_info = get_weather_info(result)
-
-
-
-# Handles the bot response to the users input
-
 # Basically handles how the Bot should respond. Uses 2 arguments 1 message and 1 username.
 def handle_response(message, username): # <-- When adding more arguments, remember to update all the places where this is called (send_message() function).
     p_message = message.lower()
@@ -61,6 +53,12 @@ def handle_response(message, username): # <-- When adding more arguments, rememb
     if p_message == "!help":
         return help_text
     if p_message.lower() in ["weather", "forecast", "vejr", "vejret"]:
+        #fetching weather data (in the handle_response() function, to make sure data is updated every time)
+        # Calling the function to fetch weather data and storing it in 'result'
+        current_weather_data = get_weather()
+
+        # Calling the function to extract weather info and storing it in 'weather_info'
+        weather_info = get_weather_info(current_weather_data)
         return weather_info
 
 
