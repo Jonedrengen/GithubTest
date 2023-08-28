@@ -29,7 +29,7 @@ async def send_message(message, user_message, is_private):
 # Function to run the Discord bot
 def run_discord_bot():
     # Bot's token, which is used to log in (Note: Always keep this private!)
-    TOKEN = "MY BOT TOKEN"
+    TOKEN = "My Bot Token"
 
     # Event that triggers when the bot is ready
     @client.event
